@@ -19,11 +19,11 @@ html, body {
   background: #000;
   color: #f5f1ec;
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  overflow-x: hidden;
 }
 
 body {
   height: 360vh;
+  overflow-x: hidden;
 }
 
 button {
@@ -31,84 +31,28 @@ button {
   color: inherit;
 }
 
-/* fixed experience */
-.screen {
-  position: fixed;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  padding: 26px 20px 42px;
-  z-index: 1;
-}
-
-.panel {
-  width: min(560px, 92vw);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* top controls */
-.controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 34px;
-  flex-wrap: wrap;
-}
-
-.symbols {
-  display: flex;
-  gap: 9px;
-}
-
-.symbol-btn,
-.level-btn,
-.next-btn,
+/* HELP */
 .help-btn {
-  border: 1px solid rgba(245,241,236,.2);
+  position: fixed;
+  top: 24px;
+  right: 22px;
+  z-index: 100;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(245,241,236,.18);
+  border-radius: 999px;
   background: rgba(255,255,255,.025);
   color: #f5f1ec;
-  border-radius: 999px;
-  min-width: 38px;
-  height: 38px;
-  padding: 0 13px;
   cursor: pointer;
-  transition: .18s ease;
-}
-
-.symbol-btn:hover,
-.level-btn:hover,
-.next-btn:hover,
-.help-btn:hover {
-  border-color: rgba(245,241,236,.48);
-  background: rgba(255,255,255,.07);
-}
-
-.symbol-btn.active {
-  background: rgba(245,241,236,.14);
-  border-color: rgba(245,241,236,.62);
-}
-
-.level-btn {
-  padding: 0 18px;
-}
-
-/* corner help */
-.help-btn {
-  position: fixed;
-  top: 18px;
-  right: 18px;
-  z-index: 999;
+  opacity: .5;
 }
 
 .help {
   position: fixed;
-  top: 62px;
-  right: 18px;
-  width: min(285px, calc(100vw - 36px));
-  padding: 18px 18px 16px;
+  top: 72px;
+  right: 22px;
+  width: min(285px, calc(100vw - 44px));
+  padding: 18px;
   border: 1px solid rgba(245,241,236,.14);
   border-radius: 18px;
   background: rgba(0,0,0,.9);
@@ -118,8 +62,7 @@ button {
   opacity: 0;
   pointer-events: none;
   transition: .18s ease;
-  z-index: 999;
-  text-align: left;
+  z-index: 100;
 }
 
 .help.open {
@@ -143,7 +86,64 @@ button {
   font-size: 12px;
 }
 
-/* text */
+/* TOPBAR */
+.topbar {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 90;
+}
+
+.symbols {
+  display: flex;
+  gap: 9px;
+}
+
+.symbol-btn,
+.level-btn,
+.next-btn {
+  border: 1px solid rgba(245,241,236,.18);
+  background: rgba(255,255,255,.025);
+  color: #f5f1ec;
+  border-radius: 999px;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 12px;
+  cursor: pointer;
+  transition: .18s ease;
+}
+
+.symbol-btn.active {
+  background: rgba(245,241,236,.14);
+  border-color: rgba(245,241,236,.62);
+}
+
+.level-btn {
+  padding: 0 18px;
+}
+
+/* MAIN */
+.stage {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 92px 22px 74px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.panel {
+  width: min(560px, 92vw);
+  text-align: center;
+  pointer-events: auto;
+}
+
 .title {
   font-size: 13px;
   letter-spacing: .18em;
@@ -151,23 +151,22 @@ button {
   opacity: .48;
   margin: 0 0 34px;
   min-height: 18px;
-  text-align: center;
 }
 
 .grid {
-  width: min(500px, 78vw);
+  width: min(82vw, 520px, calc(100vh - 260px));
   aspect-ratio: 1 / 1;
-  display: grid;
-  gap: 8px;
   margin: 0 auto;
+  display: grid;
+  gap: clamp(5px, 1.2vw, 9px);
 }
 
 .tile {
   border: 1px solid rgba(245,241,236,.22);
-  border-radius: 12px;
+  border-radius: clamp(8px, 2vw, 14px);
   display: grid;
   place-items: center;
-  font-size: clamp(18px, 5vw, 34px);
+  font-size: clamp(16px, 5vw, 34px);
   background: rgba(255,255,255,.018);
   color: #f5f1ec;
   cursor: pointer;
@@ -181,6 +180,7 @@ button {
 .tile.on {
   background: rgba(245,241,236,.12);
   border-color: rgba(245,241,236,.72);
+  color: #f5f1ec;
 }
 
 .message {
@@ -188,12 +188,11 @@ button {
   font-size: 13px;
   opacity: .45;
   min-height: 18px;
-  text-align: center;
 }
 
 .next-btn {
   display: none;
-  margin-top: 16px;
+  margin-top: 18px;
   font-size: 13px;
   opacity: .72;
 }
@@ -205,49 +204,32 @@ button {
 }
 
 .sig {
-  margin-top: 18px;
+  position: fixed;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
   color: #f5f1ec;
   text-decoration: none;
   font-size: 13px;
   opacity: 0;
   transition: .2s ease;
   pointer-events: none;
+  z-index: 20;
 }
 
 .sig.show {
-  opacity: .42;
+  opacity: .38;
   pointer-events: auto;
 }
 
-@media (max-width: 520px) {
-  .screen {
-    padding: 22px 14px 42px;
-  }
-
-  .controls {
-    gap: 8px;
-    margin-bottom: 30px;
-  }
-
-  .symbols {
-    gap: 7px;
-  }
-
-  .symbol-btn,
-  .level-btn,
-  .help-btn {
-    min-width: 36px;
-    height: 36px;
-    padding: 0 12px;
-  }
-
-  .level-btn {
-    padding: 0 15px;
-  }
-
+@media (max-height: 700px) {
   .grid {
-    width: min(360px, 86vw);
-    gap: 7px;
+    width: min(84vw, calc(100vh - 220px));
+  }
+
+  .sig.show {
+    opacity: 0;
+    pointer-events: none;
   }
 }
 </style>
@@ -255,7 +237,7 @@ button {
 
 <body>
 
-<button class="help-btn" id="helpBtn" type="button">?</button>
+<button class="help-btn" id="helpBtn">?</button>
 
 <div class="help" id="helpBox">
   <div class="help-title">how to suffer correctly</div>
@@ -266,28 +248,27 @@ button {
   <div class="help-small">no prizes. just character development.</div>
 </div>
 
-<div class="screen">
+<div class="topbar">
+  <div class="symbols">
+    <button class="symbol-btn active" data-symbol="circle">○</button>
+    <button class="symbol-btn" data-symbol="triangle">△</button>
+    <button class="symbol-btn" data-symbol="plus">+</button>
+    <button class="symbol-btn" data-symbol="corner">⅃</button>
+  </div>
+
+  <button class="level-btn" id="levelBtn">level 1</button>
+</div>
+
+<div class="stage">
   <div class="panel">
-
-    <div class="controls">
-      <div class="symbols">
-        <button class="symbol-btn active" data-symbol="circle" type="button">○</button>
-        <button class="symbol-btn" data-symbol="triangle" type="button">△</button>
-        <button class="symbol-btn" data-symbol="plus" type="button">+</button>
-        <button class="symbol-btn" data-symbol="corner" type="button">⅃</button>
-      </div>
-
-      <button class="level-btn" id="levelBtn" type="button">level 1</button>
-    </div>
-
     <div class="title" id="title">scroll to look</div>
     <div class="grid" id="grid"></div>
     <div class="message" id="message">then come back and match it</div>
-    <button class="next-btn" id="nextBtn" type="button">next</button>
-    <a class="sig" id="sig" href="https://haylortall.github.io/">♡ taylor</a>
-
+    <button class="next-btn" id="nextBtn">next</button>
   </div>
 </div>
+
+<a class="sig" id="sig" href="https://haylortall.github.io/">♡ taylor</a>
 
 <script>
 const grid = document.getElementById("grid");
@@ -335,7 +316,7 @@ let hasLooked = false;
 let won = false;
 let winText = "";
 
-function getProgress() {
+function progress() {
   const max = document.body.scrollHeight - window.innerHeight;
   return max <= 0 ? 0 : window.scrollY / max;
 }
@@ -363,7 +344,6 @@ function buildGrid() {
   winText = "";
 
   nextBtn.classList.remove("show");
-  sig.classList.remove("show");
   levelBtn.textContent = `level ${level + 1}`;
   grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
 
@@ -404,6 +384,7 @@ function buildGrid() {
 
   title.textContent = "scroll to look";
   message.textContent = "then come back and match it";
+  sig.classList.remove("show");
   window.scrollTo(0, 0);
   renderPlayer();
 }
@@ -435,24 +416,23 @@ function checkWin() {
     title.textContent = "matched";
     message.textContent = winText;
     nextBtn.classList.add("show");
-    sig.classList.add("show");
     renderPlayer();
   } else {
     nextBtn.classList.remove("show");
-    sig.classList.remove("show");
     message.textContent = `${playerPattern.size}/${targetPattern.length}`;
   }
 }
 
 function updateScroll() {
-  const p = getProgress();
+  const p = progress();
+
+  sig.classList.toggle("show", p > .94 && window.innerHeight > 700);
 
   if (won) {
     renderPlayer();
     title.textContent = "matched";
     message.textContent = winText;
     nextBtn.classList.add("show");
-    sig.classList.add("show");
   } else if (window.scrollY > 170) {
     hasLooked = true;
     renderTarget();
@@ -463,19 +443,13 @@ function updateScroll() {
     } else {
       title.textContent = "memorize";
       message.textContent = "then go back";
-      sig.classList.add("show");
     }
   } else {
     renderPlayer();
-    sig.classList.remove("show");
-
-    if (!hasLooked) {
-      title.textContent = "scroll to look";
-      message.textContent = "then come back and match it";
-    } else {
-      title.textContent = "match it";
-      message.textContent = `${playerPattern.size}/${targetPattern.length}`;
-    }
+    title.textContent = hasLooked ? "match it" : "scroll to look";
+    message.textContent = hasLooked
+      ? `${playerPattern.size}/${targetPattern.length}`
+      : "then come back and match it";
   }
 
   tiles.forEach((tile, index) => {
@@ -502,11 +476,8 @@ symbolButtons.forEach(button => {
     button.classList.add("active");
     symbolType = button.dataset.symbol;
 
-    if (window.scrollY > 170 && !won) {
-      renderTarget();
-    } else {
-      renderPlayer();
-    }
+    if (window.scrollY > 170 && !won) renderTarget();
+    else renderPlayer();
   });
 });
 
@@ -520,15 +491,8 @@ nextBtn.addEventListener("click", () => {
   buildGrid();
 });
 
-helpBtn.addEventListener("click", (event) => {
-  event.stopPropagation();
+helpBtn.addEventListener("click", () => {
   helpBox.classList.toggle("open");
-});
-
-document.addEventListener("click", (event) => {
-  if (!event.target.closest("#helpBox") && !event.target.closest("#helpBtn")) {
-    helpBox.classList.remove("open");
-  }
 });
 
 window.addEventListener("scroll", updateScroll);
